@@ -11,7 +11,7 @@ public class Main {
     public static void main(String[] args) {
         Spark.init();
 
-        ArrayList<Message> messages = new ArrayList<Message>();
+        ArrayList<Message> messages = new ArrayList<>();
 
         Spark.get("/",
                 (request, response) -> {
@@ -21,7 +21,7 @@ public class Main {
                     }
                     else {
                         m.put("name", user.name);
-                        m.put("messages", messages); //displays messages arraylist
+                        m.put("messages", messages);
                         return new ModelAndView(m, "messages.html");
                     }
                 },
@@ -36,7 +36,7 @@ public class Main {
 
         Spark.post("/messages", (request, response) -> {
             Message m1 = new Message(request.queryParams("message"));
-            if (!m1.message.isEmpty()) { // only adds message if it's not empty
+            if (!m1.message.isEmpty()) {
                 messages.add(m1);
             }
             response.redirect("/");
